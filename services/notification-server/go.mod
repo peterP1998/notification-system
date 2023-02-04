@@ -1,4 +1,4 @@
-module github.com/peterP1998/notification-system
+module github.com/peterP1998/notification-system/notification-server
 
 go 1.20
 
