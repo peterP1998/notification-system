@@ -3,6 +3,7 @@ module github.com/peterP1998/notification-system
 go 1.20
 
 require (
+	github.com/confluentinc/confluent-kafka-go v1.9.2 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/gin v1.8.2 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
@@ -21,5 +22,6 @@ require (
 	golang.org/x/sys v0.4.0 // indirect
 	golang.org/x/text v0.6.0 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
+	gopkg.in/confluentinc/confluent-kafka-go.v1 v1.8.2 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

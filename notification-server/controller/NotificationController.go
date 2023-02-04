@@ -12,10 +12,16 @@ type NotificationControllerInterface interface {
 }
 
 type NotificationController struct {
-
+	notificationService service.NotificationServiceInterface
 }
 
-func (artistController *NotificationController) SendNotification(ctx *gin.Context) {
+func NotificationControllerCreate(notificationService service.NotificationServiceInterface) NotificationControllerInterface {
+	return &NotificationController{
+		notificationService: notificationService,
+	}
+} 
+
+func (notificationController *NotificationController) SendNotification(ctx *gin.Context) {
 	var notification model.Notification
 	err := ctx.ShouldBindJSON(&notification)
 	if err != nil {
@@ -23,6 +29,5 @@ func (artistController *NotificationController) SendNotification(ctx *gin.Contex
 		ctx.JSON(400, "Parameters are not ok.")
 		return
 	}
-	notificationService, _ := service.GetNotificationService(notification.Type)
-	notificationService.PublishNotification(&model.Notification{})
+	notificationController.notificationService.PublishNotification(&notification)
 }
