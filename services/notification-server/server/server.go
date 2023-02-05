@@ -1,4 +1,4 @@
-package server 
+package server
 
 import (
 	"github.com/peterP1998/notification-system/notification-server/config"

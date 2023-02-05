@@ -3,8 +3,8 @@ package controller
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/peterP1998/notification-system/notification-server/service"
 	"github.com/peterP1998/notification-system/libs/notification/model"
+	"github.com/peterP1998/notification-system/notification-server/service"
 )
 
 type NotificationControllerInterface interface {
@@ -19,7 +19,7 @@ func NotificationControllerCreate(notificationService service.NotificationServic
 	return &NotificationController{
 		notificationService: notificationService,
 	}
-} 
+}
 
 func (notificationController *NotificationController) SendNotification(ctx *gin.Context) {
 	var notification model.Notification

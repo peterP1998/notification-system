@@ -5,5 +5,5 @@ import (
 )
 
 type SenderServiceInterface interface {
-	SendNotification(notification *model.Notification) (error)
+	SendNotification(notification *model.Notification) error
 }

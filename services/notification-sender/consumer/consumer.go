@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/peterP1998/notification-system/notification-sender/service"
+	"github.com/peterP1998/notification-system/notification-sender/config"
 )
 
 var kafkaConsumer *kafka.Consumer
@@ -13,7 +14,7 @@ func CreateSubscriber() {
 
 	fmt.Printf("Starting consumer...")
 	kafkaConsumer, err = kafka.NewConsumer(&kafka.ConfigMap{
-		"bootstrap.servers": "localhost:9092",
+		"bootstrap.servers": config.Configuration.KafkaHost,
 		"group.id":          "myGroup",
 		"auto.offset.reset": "earliest",
 	})
@@ -22,7 +23,7 @@ func CreateSubscriber() {
 		panic(err)
 	}
 
-	kafkaConsumer.SubscribeTopics([]string{"slack-notification-topic", "email-notification-topic"}, nil)
+	kafkaConsumer.SubscribeTopics(config.Configuration.Topics, nil)
 
 	go consumeMessages()
 }

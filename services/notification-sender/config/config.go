@@ -13,6 +13,7 @@ var defaultConfiguration []byte
 type Config struct {
 	Host      string
 	KafkaHost string
+	Topics    []string
 }
 
 var Configuration *Config

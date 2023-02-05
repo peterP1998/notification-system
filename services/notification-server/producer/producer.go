@@ -1,17 +1,17 @@
 package producer
 
 import (
-	"log"
-	"fmt"
 	"encoding/json"
+	"fmt"
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/peterP1998/notification-system/libs/notification/model"
 	"github.com/peterP1998/notification-system/notification-server/config"
+	"log"
 )
 
 var kafkaProducer *kafka.Producer
 
-func InitProducer() { 
+func InitProducer() {
 	kafkaProducer, _ = kafka.NewProducer(&kafka.ConfigMap{"bootstrap.servers": config.Configuration.KafkaHost})
 	log.Printf("producer %v", kafkaProducer)
 
@@ -42,5 +42,5 @@ func ProduceMessage(notification *model.Notification, topic string) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	
+
 }

@@ -10,7 +10,7 @@ func InitRouter() *gin.Engine {
 	router := gin.New()
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
-	
+
 	notificationService := service.NotificationService{}
 	notificate := controller.NotificationControllerCreate(notificationService)
 

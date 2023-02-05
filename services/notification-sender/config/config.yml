@@ -1,0 +1,5 @@
+host: localhost:8021
+kafkaHost: localhost:9092
+topics:
+  - slack-notification-topic
+  - email-notification-topic
