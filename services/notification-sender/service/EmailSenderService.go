@@ -1,19 +1,14 @@
 package service
 
 import (
-	"github.com/peterP1998/notification-system/notification-server/producer"
+	"github.com/nikoksr/notify/service/mail"
 	"github.com/peterP1998/libs/notification/model"
-	"strings"
 )
 
-type NotificationServiceInterface interface {
-	PublishNotification(notification *model.Notification)
+type EmailSenderService struct {
 }
 
-type NotificationService struct {
-}
-
-func (NotificationService) PublishNotification(notification *model.Notification) {
+func (EmailSenderService) SendNotification(notification *model.Notification) {
 	topic := buildTopic(notification.Type)
 	producer.ProduceMessage(notification, topic)
 }

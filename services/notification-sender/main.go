@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	consumer.ConsumeMessages()
+	consumer.CreateSubscriber()
 	fmt.Println("Hello, World")
 	server.Init()
 }

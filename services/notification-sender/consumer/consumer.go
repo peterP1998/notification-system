@@ -5,9 +5,13 @@ import (
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 )
 
-func ConsumeMessages() {
+var kafkaConsumer *kafka.Consumer
+
+func CreateSubscriber() {
+	var err error
+
 	fmt.Printf("Starting consumer...")
-	c, err := kafka.NewConsumer(&kafka.ConfigMap{
+	kafkaConsumer, err = kafka.NewConsumer(&kafka.ConfigMap{
 		"bootstrap.servers": "localhost:9092",
 		"group.id": "myGroup",
 		"auto.offset.reset": "earliest",
@@ -17,10 +21,15 @@ func ConsumeMessages() {
 		panic(err)
 	}
 
-	c.SubscribeTopics([]string{"slack-notification-topic"}, nil)
+	kafkaConsumer.SubscribeTopics([]string{"slack-notification-topic"}, nil)
+
+	go consumeMessages()
+}
+
+func consumeMessages() {
 
 	for {
-		msg, err := c.ReadMessage(-1)
+		msg, err := kafkaConsumer.ReadMessage(-1)
 		if err == nil {
 			data := string(msg.Value)
 			fmt.Printf("Message on %s: %s\n", msg.TopicPartition, data)
@@ -29,6 +38,4 @@ func ConsumeMessages() {
 			fmt.Printf("Consumer error: %v (%v)\n", err, msg)
 		}
 	}
-
-	c.Close()
 }
