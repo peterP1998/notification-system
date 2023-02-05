@@ -2,7 +2,7 @@ package service
 
 import (
 	"github.com/peterP1998/notification-system/notification-server/producer"
-	"github.com/peterP1998/libs/notification/model"
+	"github.com/peterP1998/notification-system/libs/notification/model"
 	"strings"
 )
 

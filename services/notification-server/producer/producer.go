@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"encoding/json"
 	"github.com/confluentinc/confluent-kafka-go/kafka"
-	"github.com/peterP1998/libs/notification/model"
+	"github.com/peterP1998/notification-system/libs/notification/model"
 )
 
 var kafkaProducer *kafka.Producer

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/peterP1998/notification-system/notification-server/service"
-	"github.com/peterP1998/libs/notification/model"
+	"github.com/peterP1998/notification-system/libs/notification/model"
 )
 
 type NotificationControllerInterface interface {
