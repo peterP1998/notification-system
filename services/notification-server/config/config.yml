@@ -1,0 +1,2 @@
+host: localhost:8020
+kafkaHost: localhost:9092

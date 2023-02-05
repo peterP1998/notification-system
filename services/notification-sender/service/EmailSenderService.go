@@ -26,7 +26,7 @@ func (EmailSenderService) SendNotification(notification *model.Notification) err
 	// TODO create template for all notifications
     msg := []byte(
         "Subject: Notification\r\n\r\n" +
-        "Email body\r\n")
+        "Samo levski Yisagi!\r\n")
 
     auth := smtp.PlainAuth("", user, password, host)
 

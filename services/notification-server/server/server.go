@@ -1,7 +1,11 @@
 package server 
 
+import (
+	"github.com/peterP1998/notification-system/notification-server/config"
+)
+
 func Init() {
 	//config := config.GetConfig()
 	r := InitRouter()
-	r.Run("localhost:8020")
+	r.Run(config.Configuration.Host)
 }

@@ -6,6 +6,8 @@ import (
 	"strings"
 )
 
+const topicSuffix = "-notification-topic"
+
 type NotificationServiceInterface interface {
 	PublishNotification(notification *model.Notification)
 }
@@ -19,7 +21,6 @@ func (NotificationService) PublishNotification(notification *model.Notification)
 }
 
 func buildTopic(notificationType model.NotificationType) (string) {
-	topicSuffix := "-notification-topic"
     topic := strings.ToLower(string(notificationType)) + topicSuffix
     
     return topic

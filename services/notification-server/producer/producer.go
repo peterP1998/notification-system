@@ -6,13 +6,13 @@ import (
 	"encoding/json"
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/peterP1998/notification-system/libs/notification/model"
+	"github.com/peterP1998/notification-system/notification-server/config"
 )
 
 var kafkaProducer *kafka.Producer
 
 func InitProducer() { 
-	fmt.Printf("Starting producer...")
-	kafkaProducer, _ = kafka.NewProducer(&kafka.ConfigMap{"bootstrap.servers": "localhost:9092"})
+	kafkaProducer, _ = kafka.NewProducer(&kafka.ConfigMap{"bootstrap.servers": config.Configuration.KafkaHost})
 	log.Printf("producer %v", kafkaProducer)
 
 	go func() {
