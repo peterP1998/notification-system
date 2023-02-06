@@ -3,3 +3,18 @@ kafkaHost: localhost:9092
 topics:
   - slack-notification-topic
   - email-notification-topic
+  - sms-notification-topic
+
+email:
+  from: petar.petrov220998@gmail.com
+  addr: smtp.gmail.com:587
+  host: smtp.gmail.com
+  password: ""
+
+sms:
+  accountId: ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  accountToken: f2xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  from: 4324234324
+
+
+   

@@ -11,8 +11,8 @@ import (
 var kafkaProducer *kafka.Producer
 
 func InitProducer(kafkaHost string) {
+	log.Println("Creating producer")
 	kafkaProducer, _ = kafka.NewProducer(&kafka.ConfigMap{"bootstrap.servers": kafkaHost})
-	log.Printf("producer %v", kafkaProducer)
 
 	go monitorEvents()
 }

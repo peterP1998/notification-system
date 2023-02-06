@@ -11,9 +11,24 @@ import (
 var defaultConfiguration []byte
 
 type Config struct {
-	Host      string
-	KafkaHost string
-	Topics    []string
+	Host        string
+	KafkaHost   string
+	Topics      []string
+	EmailConfig Email
+	SMSConfig   SMS
+}
+
+type Email struct {
+	From     string
+	Addr     string
+	Host     string
+	Password string
+}
+
+type SMS struct {
+	AccountId    string
+	AccountToken string
+	From         string
 }
 
 func Read(configuration *Config) error {
