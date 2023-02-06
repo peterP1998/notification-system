@@ -9,11 +9,12 @@ import (
 )
 
 func main() {
-	err := config.Read()
+	var configuration config.Config
+	err := config.Read(&configuration)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	producer.InitProducer()
+	producer.InitProducer(configuration.KafkaHost)
 	fmt.Println("Hello, World")
-	server.Init()
+	server.Init(configuration.Host)
 }

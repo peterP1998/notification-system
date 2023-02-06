@@ -1,10 +1,6 @@
 package server
 
-import (
-	"github.com/peterP1998/notification-system/notification-sender/config"
-)
-
-func Init() {
+func Init(serverHost string) {
 	r := InitRouter()
-	r.Run(config.Configuration.Host)
+	r.Run(serverHost)
 }

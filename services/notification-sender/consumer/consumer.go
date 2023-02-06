@@ -4,17 +4,16 @@ import (
 	"fmt"
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/peterP1998/notification-system/notification-sender/service"
-	"github.com/peterP1998/notification-system/notification-sender/config"
 )
 
 var kafkaConsumer *kafka.Consumer
 
-func CreateSubscriber() {
+func CreateSubscriber(kafkaHost string, kafkaTopics []string) {
 	var err error
 
 	fmt.Printf("Starting consumer...")
 	kafkaConsumer, err = kafka.NewConsumer(&kafka.ConfigMap{
-		"bootstrap.servers": config.Configuration.KafkaHost,
+		"bootstrap.servers": kafkaHost,
 		"group.id":          "myGroup",
 		"auto.offset.reset": "earliest",
 	})
@@ -23,7 +22,7 @@ func CreateSubscriber() {
 		panic(err)
 	}
 
-	kafkaConsumer.SubscribeTopics(config.Configuration.Topics, nil)
+	kafkaConsumer.SubscribeTopics(kafkaTopics, nil)
 
 	go consumeMessages()
 }
@@ -34,8 +33,10 @@ func consumeMessages() {
 		msg, err := kafkaConsumer.ReadMessage(-1)
 		if err == nil {
 			fmt.Printf("Message on %s: \n", msg.Value)
-			service.SendNotification(msg.Value)
-			//fmt.Printf("Message on %s: \n", msg.Value)
+			err = service.SendNotification(msg.Value)
+			if err != nil {
+				fmt.Println(err)
+			}
 		} else {
 			// The client will automatically try to recover from all errors.
 			fmt.Printf("Consumer error: %v (%v)\n", err, msg)

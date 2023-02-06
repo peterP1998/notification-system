@@ -15,24 +15,18 @@ type Config struct {
 	KafkaHost string
 }
 
-var Configuration *Config
-
-func Read() error {
-	// Environment variables
+func Read(configuration *Config) error {
 	viper.AutomaticEnv()
 	viper.SetEnvPrefix("APP")
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_", "-", "_"))
 
-	// Configuration file
 	viper.SetConfigType("yml")
 
-	// Read configuration
 	if err := viper.ReadConfig(bytes.NewBuffer(defaultConfiguration)); err != nil {
 		return err
 	}
 
-	// Unmarshal the configuration
-	if err := viper.Unmarshal(&Configuration); err != nil {
+	if err := viper.Unmarshal(&configuration); err != nil {
 		return err
 	}
 	return nil

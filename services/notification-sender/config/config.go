@@ -16,9 +16,7 @@ type Config struct {
 	Topics    []string
 }
 
-var Configuration *Config
-
-func Read() error {
+func Read(configuration *Config) error {
 	// Environment variables
 	viper.AutomaticEnv()
 	viper.SetEnvPrefix("APP")
@@ -33,7 +31,7 @@ func Read() error {
 	}
 
 	// Unmarshal the configuration
-	if err := viper.Unmarshal(&Configuration); err != nil {
+	if err := viper.Unmarshal(&configuration); err != nil {
 		return err
 	}
 	return nil

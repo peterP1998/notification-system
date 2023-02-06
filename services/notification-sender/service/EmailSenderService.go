@@ -1,9 +1,8 @@
 package service
 
 import (
-	//"fmt"
+	"fmt"
 	"github.com/peterP1998/notification-system/libs/notification/model"
-	"log"
 	"net/smtp"
 )
 
@@ -31,10 +30,12 @@ func (EmailSenderService) SendNotification(notification *model.Notification) err
 
 	auth := smtp.PlainAuth("", user, password, host)
 
+	fmt.Println("test")
 	err := smtp.SendMail(addr, auth, from, to, msg)
 
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("test2")
+		return err
 	}
 
 	return nil

@@ -3,6 +3,7 @@ package service
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/peterP1998/notification-system/libs/notification/model"
 )
 
@@ -22,6 +23,7 @@ func SendNotification(message []byte) error {
 	err = senderService.SendNotification(&notification)
 
 	if err != nil {
+		fmt.Println(err)
 		return err
 	}
 
@@ -42,6 +44,10 @@ func senderServiceFactory(notification model.Notification) (SenderServiceInterfa
 	var senderService SenderServiceInterface
 	if notification.Type == "EMAIL" {
 		senderService = EmailSenderService{}
+	} else if notification.Type == "SLACK" {
+		senderService = SlackSenderService{}
+	} else if notification.Type == "SMS" {
+		senderService = SMSSenderService{}
 	} else {
 		return nil, errors.New("can't find notification sender of this type")
 	}
