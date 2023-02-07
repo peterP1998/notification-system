@@ -47,3 +47,5 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	moul.io/http2curl v1.0.0 // indirect
 )
+
+replace github.com/peterP1998/notification-system/libs/notification v0.0.0-20230207141006-81166162539c => ../../libs/notification

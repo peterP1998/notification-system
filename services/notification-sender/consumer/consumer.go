@@ -7,11 +7,8 @@ import (
 	"github.com/peterP1998/notification-system/notification-sender/consumer/retry"
 )
 
-const (
-	MAX_NUMBER_OF_RETRY = 5
-	TOPIC_PREFIX        = "retry_topic"
-	DEAD_LETER_TOPIC    = "dead_letter_queue"
-)
+
+var RETRY_TOPICS = []string{"retry_topic_1", "retry_topic_2", "retry_topic_3", "retry_topic_4", "retry_topic_5"}
 
 var retryConsumer *kafka.Consumer
 var kafkaConsumer *kafka.Consumer

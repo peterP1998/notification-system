@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/peterP1998/notification-system/notification-sender/config"
 	"github.com/peterP1998/notification-system/notification-sender/consumer"
+	"github.com/peterP1998/notification-system/notification-sender/consumer/retry"
 	"github.com/peterP1998/notification-system/notification-sender/server"
 	"log"
 )
@@ -13,7 +14,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	consumer.CreateSubscriber(configuration.KafkaHost, configuration.Topics)
+	consumer.CreateMainConsumer(configuration.KafkaHost, configuration.Topics)
 	consumer.CreateRetryConsumer(configuration.KafkaHost)
 	retry.CreateRetryProducer(configuration.KafkaHost)
 	server.Init(configuration.Host)
