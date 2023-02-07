@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"fmt"
+	"log"
 	"github.com/gin-gonic/gin"
 	"github.com/peterP1998/notification-system/libs/notification/model"
 	"github.com/peterP1998/notification-system/notification-server/service"
@@ -25,9 +25,15 @@ func (notificationController *NotificationController) SendNotification(ctx *gin.
 	var notification model.Notification
 	err := ctx.ShouldBindJSON(&notification)
 	if err != nil {
-		fmt.Println(err)
+		log.Printf("%s", err)
 		ctx.JSON(400, "Parameters are not ok.")
 		return
 	}
-	notificationController.notificationService.PublishNotification(&notification)
+	err = notificationController.notificationService.PublishNotification(&notification)
+
+	if err != nil {
+		log.Printf("%s", err)
+		ctx.JSON(400, err)
+		return
+	}
 }

@@ -1,9 +1,7 @@
 package main
 
 import (
-	"fmt"
 	"github.com/peterP1998/notification-system/notification-server/config"
-	"github.com/peterP1998/notification-system/notification-server/producer"
 	"github.com/peterP1998/notification-system/notification-server/server"
 	"log"
 )
@@ -14,7 +12,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	producer.CreateProducer(configuration.KafkaHost)
-	fmt.Println("Hello, World")
-	server.Init(configuration.Host)
+	log.Printf("Starting application...")
+	server.Init(configuration.Host, configuration.KafkaHost)
 }

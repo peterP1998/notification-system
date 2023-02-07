@@ -10,7 +10,6 @@ const (
 
 type Notification struct {
 	Id       int
-	Sender   string
 	Receiver string
 	Message  string
 	Type     NotificationType
