@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"github.com/peterP1998/notification-system/libs/notification/model"
 	"net/smtp"
 )
@@ -23,7 +22,6 @@ func (EmailSenderService) SendNotification(notification *model.Notification) err
 	addr := "smtp.gmail.com:587"
 	host := "smtp.gmail.com"
 
-	// TODO create template for all notifications
 	msg := []byte(
 		"Subject: Notification\r\n\r\n" +
 			notification.Message + "\r\n")

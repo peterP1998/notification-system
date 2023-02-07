@@ -14,5 +14,7 @@ func main() {
 		log.Fatal(err.Error())
 	}
 	consumer.CreateSubscriber(configuration.KafkaHost, configuration.Topics)
+	consumer.CreateRetryConsumer(configuration.KafkaHost)
+	retry.CreateRetryProducer(configuration.KafkaHost)
 	server.Init(configuration.Host)
 }

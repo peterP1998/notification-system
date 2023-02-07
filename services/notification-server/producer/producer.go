@@ -17,12 +17,12 @@ func InitProducer(kafkaHost string) {
 	go monitorEvents()
 }
 
-func ProduceMessage(notification *model.Notification, topic string) {
+func ProduceMessage(notification []byte, topic string) {
 	b, _ := json.Marshal(notification)
 	log.Printf("producer %v", kafkaProducer)
 	err := kafkaProducer.Produce(&kafka.Message{
 		TopicPartition: kafka.TopicPartition{Topic: &topic, Partition: kafka.PartitionAny},
-		Value:          b,
+		Value:          notification,
 	}, nil)
 	if err != nil {
 		fmt.Println(err)
