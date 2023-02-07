@@ -10,6 +10,8 @@ As you can see from the picture, our application will have only one endpoint. Pa
 
 ## Architecture
 
+The notification system contains three main parts. A producer microservice(notification service), one of the purposes of this microservice is to expose internal endpoint to the main application. This endpoint is responsible to validate the notification and add it into the kakfa queue. For now we are supporting three different notification channels(EMAIL, SLACK, SMS) and we have kafka topic for each of these types. The second part of our system is the kafka. Currently we setup the kafka as simple as possible(have only one partion for our topics), but we can easily extend it. The third part of our system is the notification sender. This service has two main functionalities, subscribing for  topics and send the notification using the correct communication channel. It has third hidden functionality for the end user, retry mechanism. If sending a notification fails, for exapmle the third party library, which we use to send the notification is not working now, we retry 5 times. If after the fifth retry, still something is failing, the notification will be added to the dead letter queue, which can be used for analyzing and monitoring. 
+
 ## Initial steps
 ### 1. Run kafka on your local machine:
 First you need to have docker installed on your machine. Here is a
