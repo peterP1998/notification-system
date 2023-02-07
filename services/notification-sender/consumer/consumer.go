@@ -8,7 +8,7 @@ import (
 )
 
 
-var RETRY_TOPICS = []string{"retry_topic_1", "retry_topic_2", "retry_topic_3", "retry_topic_4", "retry_topic_5"}
+var RETRY_TOPICS = []string{"retry-topic-1", "retry-topic-2", "retry-topic-3", "retry-topic-4", "retry-topic-5"}
 
 var retryConsumer *kafka.Consumer
 var kafkaConsumer *kafka.Consumer

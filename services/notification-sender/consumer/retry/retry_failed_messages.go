@@ -11,12 +11,12 @@ var retryProducer *kafka.Producer
 
 const (
 	MAX_NUMBER_OF_RETRY = 5
-	TOPIC_PREFIX        = "retry_topic_"
+	TOPIC_PREFIX        = "retry-topic-"
 	DEAD_LETER_TOPIC    = "dead_letter_queue"
 )
 
 func CreateRetryProducer(kafkaHost string) {
-	producer.CreateProducer(retryProducer, kafkaHost)
+	retryProducer, _ = producer.CreateProducer(kafkaHost)
 }
 
 func RetryMessage(msg *kafka.Message) {

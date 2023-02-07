@@ -6,11 +6,16 @@ import (
 	"log"
 )
 
-func CreateProducer(producer *kafka.Producer, kafkaHost string) {
+func CreateProducer(kafkaHost string) (*kafka.Producer, error) {
 	log.Println("Creating producer")
-	producer, _ = kafka.NewProducer(&kafka.ConfigMap{"bootstrap.servers": kafkaHost})
+	producer, err := kafka.NewProducer(&kafka.ConfigMap{"bootstrap.servers": kafkaHost})
+	if err != nil {
+		return nil, err
+	}
 
 	go monitorEvents(producer)
+
+	return producer, nil
 }
 
 func ProduceMessage(producer *kafka.Producer, notification []byte, topic string) {

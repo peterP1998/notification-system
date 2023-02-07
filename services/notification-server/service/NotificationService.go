@@ -19,7 +19,7 @@ type NotificationService struct {
 func (NotificationService) PublishNotification(notification *model.Notification) {
 	topic := buildTopic(notification.Type)
 	byteNotification, _ := json.Marshal(notification)
-	producer.ProduceMessage(byteNotification, topic)
+	producer.PublishNotification(byteNotification, topic)
 }
 
 func buildTopic(notificationType model.NotificationType) string {

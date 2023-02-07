@@ -14,7 +14,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	producer.InitProducer(configuration.KafkaHost)
+	producer.CreateProducer(configuration.KafkaHost)
 	fmt.Println("Hello, World")
 	server.Init(configuration.Host)
 }

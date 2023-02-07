@@ -20,7 +20,7 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.6 // indirect
-	github.com/peterP1998/notification-system/libs/notification v0.0.0-20230205134618-572f81ff0e0a // indirect
+	github.com/peterP1998/notification-system/libs/notification v0.0.0-20230207141006-81166162539c // indirect
 	github.com/spf13/afero v1.9.3 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
@@ -38,3 +38,5 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
+
+replace github.com/peterP1998/notification-system/libs/notification v0.0.0-20230207141006-81166162539c => ../../libs/notification
