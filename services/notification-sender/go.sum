@@ -225,6 +225,8 @@ github.com/pelletier/go-toml/v2 v2.0.6 h1:nrzqCb7j9cDFj2coyLNLaZuJTLjWjlaz6nvTvI
 github.com/pelletier/go-toml/v2 v2.0.6/go.mod h1:eumQOmlWiOPt5WriQQqoM5y18pDHwha2N+QD+EUNTek=
 github.com/peterP1998/notification-system/libs/notification v0.0.0-20230205141555-711c24acb1ee h1:jd05/93ke8YtH+iZ+ue8y0VSLdQUIRDL/K1bPu7QQ28=
 github.com/peterP1998/notification-system/libs/notification v0.0.0-20230205141555-711c24acb1ee/go.mod h1:pAJWUE6Zp2GiDJ4yoFOYre240IXAUMhn8eI8kmGwO+M=
+github.com/peterP1998/notification-system/libs/notification v0.0.0-20230207141006-81166162539c h1:4nnjGzH+F+lliCMdmon/Al+nYbIm109y9jpzuJe0nco=
+github.com/peterP1998/notification-system/libs/notification v0.0.0-20230207141006-81166162539c/go.mod h1:pAJWUE6Zp2GiDJ4yoFOYre240IXAUMhn8eI8kmGwO+M=
 github.com/pkg/diff v0.0.0-20210226163009-20ebb0f2a09e/go.mod h1:pJLUxLENpZxwdsKMEsNbx1VGcRFpLqf3715MtcvvzbA=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=

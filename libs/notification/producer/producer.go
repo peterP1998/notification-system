@@ -1,5 +1,11 @@
 package producer
 
+import (
+	"fmt"
+	"github.com/confluentinc/confluent-kafka-go/kafka"
+	"log"
+)
+
 func CreateProducer(producer *kafka.Producer, kafkaHost string) {
 	log.Println("Creating producer")
 	producer, _ = kafka.NewProducer(&kafka.ConfigMap{"bootstrap.servers": kafkaHost})

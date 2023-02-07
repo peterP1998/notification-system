@@ -25,7 +25,7 @@ require (
 	github.com/nikoksr/notify v0.38.0 // indirect
 	github.com/parnurzeal/gorequest v0.2.16 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.6 // indirect
-	github.com/peterP1998/notification-system/libs/notification v0.0.0-20230205141555-711c24acb1ee // indirect
+	github.com/peterP1998/notification-system/libs/notification v0.0.0-20230207141006-81166162539c // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/spf13/afero v1.9.3 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
