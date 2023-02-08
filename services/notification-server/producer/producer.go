@@ -17,7 +17,6 @@ type Producer struct {
 }
 
 func CreateProducer(kafkaHost string) ProducerInterface {
-	log.Printf("Creating Producer")
 	producer, _ := producer.CreateProducer(kafkaHost)
 	return &Producer{
 		kafkaProducer: producer,

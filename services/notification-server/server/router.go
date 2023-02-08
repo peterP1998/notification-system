@@ -16,9 +16,9 @@ func InitRouter(kafkaHost string) *gin.Engine {
     producerClient := producer.CreateProducer(kafkaHost)
 	log.Printf("%s", producerClient)
 	notificationService := service.NotificationServiceCreate(producerClient)
-	notificate := controller.NotificationControllerCreate(notificationService)
+	notification := controller.NotificationControllerCreate(notificationService)
 
-	router.POST("/notificate", notificate.SendNotification)
+	router.POST("/notification", notification.SendNotification)
 	return router
 
 }

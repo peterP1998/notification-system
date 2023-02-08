@@ -13,15 +13,15 @@ var retryConsumer *kafka.Consumer
 var kafkaConsumer *kafka.Consumer
 var serviceFacade service.SenderServiceFacadeInterface
 
-func CreateConsumers(kafkaHost string, kafkaTopics []string, serviceFacade service.SenderServiceFacadeInterface) {
+func CreateConsumers(kafkaHost string, kafkaTopics []string, serviceFacadeInterface service.SenderServiceFacadeInterface) {
 
 	log.Print("Creating the main consumer")
 	createConsumer(kafkaConsumer, kafkaHost, kafkaTopics)
 
 	log.Print("Creating the retry consumer")
-	createConsumer(kafkaConsumer, kafkaHost, kafkaTopics)
+	createConsumer(kafkaConsumer, kafkaHost, RETRY_TOPICS)
 
-	serviceFacade = serviceFacade
+	serviceFacade = serviceFacadeInterface
 }
 
 func createConsumer(consumer *kafka.Consumer, kafkaHost string, kafkaTopics []string) {

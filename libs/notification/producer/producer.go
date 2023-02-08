@@ -19,7 +19,7 @@ func CreateProducer(kafkaHost string) (*kafka.Producer, error) {
 }
 
 func ProduceMessage(producer *kafka.Producer, notification []byte, topic string) {
-	log.Printf("producer %v", producer)
+	log.Printf("Publishing notfication into topic %s", topic)
 	err := producer.Produce(&kafka.Message{
 		TopicPartition: kafka.TopicPartition{Topic: &topic, Partition: kafka.PartitionAny},
 		Value:          notification,
