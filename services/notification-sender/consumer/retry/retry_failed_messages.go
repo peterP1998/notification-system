@@ -36,6 +36,14 @@ func RetryMessage(msg *kafka.Message) {
 	producer.ProduceMessage(retryProducer, msg.Value, topic)
 }
 
+func GetRetryTopics(msg *kafka.Message) []string {
+	var retryTopics [MAX_NUMBER_OF_RETRY]string
+	for i := 1; i <= MAX_NUMBER_OF_RETRY; i++ {
+		retryTopics[i-1] = TOPIC_PREFIX + strconv.Itoa(i)
+	}
+	return retryTopics[:]
+}
+
 func isAlreadyRetried(topic string) bool {
 	if strings.Contains(topic, TOPIC_PREFIX) {
 		return true

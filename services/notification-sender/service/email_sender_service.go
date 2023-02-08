@@ -10,7 +10,6 @@ import (
 type EmailSenderService struct {
 }
 
-// TODO refactor
 func (EmailSenderService) SendNotification(notification *model.Notification) error {
 
 	to := []string{
@@ -21,12 +20,12 @@ func (EmailSenderService) SendNotification(notification *model.Notification) err
 		"Subject: Notification\r\n\r\n" +
 			notification.Message + "\r\n")
 
-	auth := smtp.PlainAuth("", config.GetConfigProperty(constants.EMAIL_FROM), 
-	                           config.GetConfigProperty(constants.EMAIL_PASSWORD), 
-							   config.GetConfigProperty(constants.EMAIL_HOST))
+	auth := smtp.PlainAuth("", config.GetConfigProperty(constants.EMAIL_FROM),
+		config.GetConfigProperty(constants.EMAIL_PASSWORD),
+		config.GetConfigProperty(constants.EMAIL_HOST))
 
-	err := smtp.SendMail(config.GetConfigProperty(constants.EMAIL_ADDR), 
-	                     auth, config.GetConfigProperty(constants.EMAIL_FROM), to, msg)
+	err := smtp.SendMail(config.GetConfigProperty(constants.EMAIL_ADDR),
+		auth, config.GetConfigProperty(constants.EMAIL_FROM), to, msg)
 
 	if err != nil {
 		return err

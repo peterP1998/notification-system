@@ -2,12 +2,12 @@ package service
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/peterP1998/notification-system/libs/notification/model"
 	"github.com/peterP1998/notification-system/notification-sender/config"
 	"github.com/peterP1998/notification-system/notification-sender/constants"
 	"github.com/twilio/twilio-go"
 	twilioApi "github.com/twilio/twilio-go/rest/api/v2010"
+	"log"
 )
 
 type SMSSenderService struct {
@@ -27,10 +27,11 @@ func (SMSSenderService) SendNotification(notification *model.Notification) error
 
 	resp, err := client.Api.CreateMessage(params)
 	if err != nil {
-		fmt.Println(err.Error())
+		log.Print(err.Error())
+		return err
 	} else {
 		response, _ := json.Marshal(*resp)
-		fmt.Println("Response: " + string(response))
+		log.Print("Response: " + string(response))
 	}
 	return nil
 }

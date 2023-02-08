@@ -3,12 +3,16 @@ package service
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"github.com/peterP1998/notification-system/libs/notification/model"
+	"log"
 )
 
-func SendNotification(message []byte) error {
+type SenderServiceFacade struct {
+}
 
+func (senderServiceFacade SenderServiceFacade) SendNotification(message []byte) error {
+
+	log.Print("Sending notification")
 	notification, err := convertToNotification(message)
 	if err != nil {
 		return err
@@ -23,9 +27,11 @@ func SendNotification(message []byte) error {
 	err = senderService.SendNotification(&notification)
 
 	if err != nil {
-		fmt.Println(err)
+		log.Print("Error is thrown in the ")
 		return err
 	}
+
+	log.Print("Sending notification finished successfull")
 
 	return nil
 }
@@ -49,7 +55,7 @@ func senderServiceFactory(notification model.Notification) (SenderServiceInterfa
 	} else if notification.Type == "SMS" {
 		senderService = SMSSenderService{}
 	} else {
-		return nil, errors.New("can't find notification sender of this type")
+		return nil, errors.New("can't find notification sender service of this type")
 	}
 
 	return senderService, nil

@@ -1,23 +1,27 @@
 package consumer
 
 import (
-	"log"
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/peterP1998/notification-system/notification-sender/consumer/retry"
 	"github.com/peterP1998/notification-system/notification-sender/service"
+	"log"
 )
 
 var RETRY_TOPICS = []string{"retry-topic-1", "retry-topic-2", "retry-topic-3", "retry-topic-4", "retry-topic-5"}
 
 var retryConsumer *kafka.Consumer
 var kafkaConsumer *kafka.Consumer
+var serviceFacade service.SenderServiceFacadeInterface
 
-func CreateRetryConsumer(kafkaHost string) {
-	createConsumer(retryConsumer, kafkaHost, RETRY_TOPICS)
-}
+func CreateConsumers(kafkaHost string, kafkaTopics []string, serviceFacade service.SenderServiceFacadeInterface) {
 
-func CreateMainConsumer(kafkaHost string, kafkaTopics []string) {
+	log.Print("Creating the main consumer")
 	createConsumer(kafkaConsumer, kafkaHost, kafkaTopics)
+
+	log.Print("Creating the retry consumer")
+	createConsumer(kafkaConsumer, kafkaHost, kafkaTopics)
+
+	serviceFacade = serviceFacade
 }
 
 func createConsumer(consumer *kafka.Consumer, kafkaHost string, kafkaTopics []string) {
@@ -45,7 +49,7 @@ func consumeMessages(consumer *kafka.Consumer) {
 		msg, err := consumer.ReadMessage(-1)
 		if err == nil {
 			log.Printf("Message on %s: \n", msg.Value)
-			err = service.SendNotification(msg.Value)
+			err = serviceFacade.SendNotification(msg.Value)
 			if err != nil {
 				retry.RetryMessage(msg)
 				log.Print(err)

@@ -15,12 +15,6 @@ const (
 	REGEX_FOR_MESSAGE = `^[A-Za-z0-9_-]*$`
 )
 
-
-
-type NotificationServiceInterface interface {
-	PublishNotification(notification *model.Notification) (error)
-}
-
 type NotificationService struct {
 	producerClient producer.ProducerInterface
 }

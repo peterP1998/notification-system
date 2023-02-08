@@ -5,19 +5,17 @@ import (
 	"github.com/peterP1998/notification-system/notification-sender/consumer"
 	"github.com/peterP1998/notification-system/notification-sender/consumer/retry"
 	"github.com/peterP1998/notification-system/notification-sender/server"
-	"github.com/spf13/viper"
+	"github.com/peterP1998/notification-system/notification-sender/service"
 	"log"
 )
 
 func main() {
 	var configuration config.Config
 	err := config.Read(&configuration)
-	log.Print(viper.Get("Email.From"))
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	consumer.CreateMainConsumer(configuration.KafkaHost, configuration.Topics)
-	consumer.CreateRetryConsumer(configuration.KafkaHost)
+	consumer.CreateConsumers(configuration.KafkaHost, configuration.Topics, service.SenderServiceFacade{})
 	retry.CreateRetryProducer(configuration.KafkaHost)
 	server.Init(configuration.Host)
 }
