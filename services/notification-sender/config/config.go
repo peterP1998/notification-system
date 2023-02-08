@@ -4,7 +4,9 @@ import (
 	"bytes"
 	_ "embed"
 	"github.com/spf13/viper"
+	"log"
 	"strings"
+	"fmt"
 )
 
 //go:embed config.yml
@@ -32,22 +34,24 @@ type SMS struct {
 }
 
 func Read(configuration *Config) error {
-	// Environment variables
 	viper.AutomaticEnv()
 	viper.SetEnvPrefix("APP")
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_", "-", "_"))
 
-	// Configuration file
 	viper.SetConfigType("yml")
 
-	// Read configuration
 	if err := viper.ReadConfig(bytes.NewBuffer(defaultConfiguration)); err != nil {
 		return err
 	}
 
-	// Unmarshal the configuration
 	if err := viper.Unmarshal(&configuration); err != nil {
 		return err
 	}
+
+	log.Print(configuration)
 	return nil
+}
+
+func GetConfigProperty(property string) string {
+	return fmt.Sprintf("%v",viper.Get(property))
 }

@@ -2,6 +2,8 @@ package service
 
 import (
 	"github.com/peterP1998/notification-system/libs/notification/model"
+	"github.com/peterP1998/notification-system/notification-sender/config"
+	"github.com/peterP1998/notification-system/notification-sender/constants"
 	"net/smtp"
 )
 
@@ -10,25 +12,21 @@ type EmailSenderService struct {
 
 // TODO refactor
 func (EmailSenderService) SendNotification(notification *model.Notification) error {
-	from := "petar.petrov220998@gmail.com"
-
-	user := "petar.petrov220998@gmail.com"
-	password := "" // TODO store password in secret file
 
 	to := []string{
 		notification.Receiver,
 	}
 
-	addr := "smtp.gmail.com:587"
-	host := "smtp.gmail.com"
-
 	msg := []byte(
 		"Subject: Notification\r\n\r\n" +
 			notification.Message + "\r\n")
 
-	auth := smtp.PlainAuth("", user, password, host)
+	auth := smtp.PlainAuth("", config.GetConfigProperty(constants.EMAIL_FROM), 
+	                           config.GetConfigProperty(constants.EMAIL_PASSWORD), 
+							   config.GetConfigProperty(constants.EMAIL_HOST))
 
-	err := smtp.SendMail(addr, auth, from, to, msg)
+	err := smtp.SendMail(config.GetConfigProperty(constants.EMAIL_ADDR), 
+	                     auth, config.GetConfigProperty(constants.EMAIL_FROM), to, msg)
 
 	if err != nil {
 		return err

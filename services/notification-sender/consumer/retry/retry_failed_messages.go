@@ -1,8 +1,8 @@
 package retry
 
 import (
-	"github.com/peterP1998/notification-system/libs/notification/producer"
 	"github.com/confluentinc/confluent-kafka-go/kafka"
+	"github.com/peterP1998/notification-system/libs/notification/producer"
 	"strconv"
 	"strings"
 )
