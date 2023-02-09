@@ -4,6 +4,7 @@ import (
 	"github.com/peterP1998/notification-system/libs/notification/model"
 	"github.com/peterP1998/notification-system/notification-sender/config"
 	"github.com/peterP1998/notification-system/notification-sender/constants"
+	"log"
 	"net/smtp"
 )
 
@@ -11,6 +12,8 @@ type EmailSenderService struct {
 }
 
 func (EmailSenderService) SendNotification(notification *model.Notification) error {
+
+	log.Printf("Sending email notification %v", notification)
 
 	to := []string{
 		notification.Receiver,

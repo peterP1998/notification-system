@@ -8,8 +8,6 @@ import (
 	"time"
 )
 
-var RETRY_TOPICS = []string{"retry-topic-1", "retry-topic-2", "retry-topic-3", "retry-topic-4", "retry-topic-5"}
-
 var retryConsumer *kafka.Consumer
 var kafkaConsumer *kafka.Consumer
 var serviceFacade service.SenderServiceFacadeInterface
@@ -21,7 +19,7 @@ func CreateConsumers(kafkaHost string, kafkaTopics []string,
 	createConsumer(kafkaConsumer, kafkaHost, kafkaTopics, false, 0)
 
 	log.Print("Creating the retry consumer")
-	createConsumer(kafkaConsumer, kafkaHost, RETRY_TOPICS, true, retrySeconds)
+	createConsumer(kafkaConsumer, kafkaHost, retry.GetRetryTopics(), true, retrySeconds)
 
 	serviceFacade = serviceFacadeInterface
 }

@@ -3,6 +3,7 @@ package retry
 import (
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/peterP1998/notification-system/libs/notification/producer"
+	"log"
 	"strconv"
 	"strings"
 )
@@ -21,11 +22,13 @@ func CreateRetryProducer(kafkaHost string) {
 
 func RetryMessage(msg *kafka.Message) {
 	topic := ""
+	log.Print("Retrying message wtih topic %s", msg.TopicPartition.Topic)
 	if isAlreadyRetried(*msg.TopicPartition.Topic) {
 		currentRetry := strings.TrimPrefix(*msg.TopicPartition.Topic, TOPIC_PREFIX)
 		numberOfRetries, _ := strconv.Atoi(currentRetry)
 		numberOfRetries += 1
 		if numberOfRetries > MAX_NUMBER_OF_RETRY {
+			log.Print("Adding message to dead letter queue")
 			topic = DEAD_LETER_TOPIC
 		} else {
 			topic = TOPIC_PREFIX + strconv.Itoa(numberOfRetries)
@@ -36,7 +39,7 @@ func RetryMessage(msg *kafka.Message) {
 	producer.ProduceMessage(retryProducer, msg.Value, topic)
 }
 
-func GetRetryTopics(msg *kafka.Message) []string {
+func GetRetryTopics() []string {
 	var retryTopics [MAX_NUMBER_OF_RETRY]string
 	for i := 1; i <= MAX_NUMBER_OF_RETRY; i++ {
 		retryTopics[i-1] = TOPIC_PREFIX + strconv.Itoa(i)

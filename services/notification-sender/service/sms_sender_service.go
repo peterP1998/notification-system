@@ -15,6 +15,7 @@ type SMSSenderService struct {
 
 func (SMSSenderService) SendNotification(notification *model.Notification) error {
 
+	log.Printf("Sending sms notification %v", notification)
 	client := twilio.NewRestClientWithParams(twilio.ClientParams{
 		Username: config.GetConfigProperty(constants.SMS_ACCOUNTID),
 		Password: config.GetConfigProperty(constants.SMS_TOKEN),

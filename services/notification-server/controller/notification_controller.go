@@ -25,15 +25,17 @@ func (notificationController *NotificationController) SendNotification(ctx *gin.
 	var notification model.Notification
 	err := ctx.ShouldBindJSON(&notification)
 	if err != nil {
-		log.Printf("%s", err)
-		ctx.JSON(400, "Parameters are not ok.")
+		log.Printf("Error: %s", err)
+		ctx.JSON(400, gin.H{"error": "Parameters are not ok.", "status": "Failed"})
 		return
 	}
 	err = notificationController.notificationService.PublishNotification(&notification)
 
 	if err != nil {
-		log.Printf("%s", err)
-		ctx.JSON(400, err)
+		log.Printf("Error: %s", err)
+		ctx.JSON(400, gin.H{"error": err.Error(), "status": "Failed"})
 		return
 	}
+
+	ctx.JSON(202, gin.H{"status": "Success"})
 }

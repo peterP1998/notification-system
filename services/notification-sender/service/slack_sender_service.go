@@ -22,6 +22,6 @@ func (SlackSenderService) SendNotification(notification *model.Notification) err
 		return err[0]
 	}
 
-	log.Printf("Slack notification send notification successfully %v", notification)
+	log.Printf("Slack notification was send successfully %v", notification)
 	return nil
 }

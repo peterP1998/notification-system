@@ -27,7 +27,7 @@ func (senderServiceFacade SenderServiceFacade) SendNotification(message []byte) 
 	err = senderService.SendNotification(&notification)
 
 	if err != nil {
-		log.Print("Error is thrown in the ")
+		log.Print("Error is thrown")
 		return err
 	}
 
