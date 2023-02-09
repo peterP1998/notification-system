@@ -4,6 +4,7 @@ topics:
   - slack-notification-topic
   - email-notification-topic
   - sms-notification-topic
+retrySeconds: 5
 
 email:
   from: petar.petrov220998@gmail.com

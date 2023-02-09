@@ -13,7 +13,7 @@ type ProducerInterface interface {
 }
 
 type Producer struct {
-    kafkaProducer *kafka.Producer
+	kafkaProducer *kafka.Producer
 }
 
 func CreateProducer(kafkaHost string) ProducerInterface {

@@ -1,10 +1,10 @@
 package controller
 
 import (
-	"log"
 	"github.com/gin-gonic/gin"
 	"github.com/peterP1998/notification-system/libs/notification/model"
 	"github.com/peterP1998/notification-system/notification-server/service"
+	"log"
 )
 
 type NotificationControllerInterface interface {

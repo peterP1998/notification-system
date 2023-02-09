@@ -2,16 +2,16 @@ package service
 
 import (
 	"encoding/json"
+	"errors"
 	"github.com/peterP1998/notification-system/libs/notification/model"
 	"github.com/peterP1998/notification-system/notification-server/producer"
-	"strings"
 	"log"
-	"errors"
+	"strings"
 	//"regexp"
 )
 
 const (
-	TOPCI_SUFFIX = "-notification-topic"
+	TOPCI_SUFFIX      = "-notification-topic"
 	REGEX_FOR_MESSAGE = `^[A-Za-z0-9_-]*$`
 )
 
@@ -25,7 +25,7 @@ func NotificationServiceCreate(producerClient producer.ProducerInterface) Notifi
 	}
 }
 
-func (ns NotificationService) PublishNotification(notification *model.Notification) (error){
+func (ns NotificationService) PublishNotification(notification *model.Notification) error {
 	topic := buildTopic(notification.Type)
 	err := validateNotification(notification)
 	if err != nil {
@@ -48,7 +48,7 @@ func buildTopic(notificationType model.NotificationType) string {
 	return topic
 }
 
-func validateNotification(notification *model.Notification) (error) {
+func validateNotification(notification *model.Notification) error {
 	if len(notification.Receiver) == 0 {
 		return errors.New("receiver is empty")
 	}
@@ -67,5 +67,3 @@ func validateNotification(notification *model.Notification) (error) {
 
 	return nil
 }
-
-

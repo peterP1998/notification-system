@@ -13,11 +13,12 @@ import (
 var defaultConfiguration []byte
 
 type Config struct {
-	Host        string
-	KafkaHost   string
-	Topics      []string
-	EmailConfig Email
-	SMSConfig   SMS
+	Host         string
+	KafkaHost    string
+	Topics       []string
+	RetrySeconds int64
+	EmailConfig  Email
+	SMSConfig    SMS
 }
 
 type Email struct {

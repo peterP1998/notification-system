@@ -15,7 +15,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	consumer.CreateConsumers(configuration.KafkaHost, configuration.Topics, service.SenderServiceFacade{})
+	consumer.CreateConsumers(configuration.KafkaHost, configuration.Topics, service.SenderServiceFacade{}, configuration.RetrySeconds)
 	retry.CreateRetryProducer(configuration.KafkaHost)
 	server.Init(configuration.Host)
 }

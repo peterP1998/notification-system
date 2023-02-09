@@ -5,5 +5,5 @@ import (
 )
 
 type NotificationServiceInterface interface {
-	PublishNotification(notification *model.Notification) (error)
+	PublishNotification(notification *model.Notification) error
 }

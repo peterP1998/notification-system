@@ -5,6 +5,7 @@ import (
 	"github.com/peterP1998/notification-system/notification-sender/consumer/retry"
 	"github.com/peterP1998/notification-system/notification-sender/service"
 	"log"
+	"time"
 )
 
 var RETRY_TOPICS = []string{"retry-topic-1", "retry-topic-2", "retry-topic-3", "retry-topic-4", "retry-topic-5"}
@@ -13,18 +14,19 @@ var retryConsumer *kafka.Consumer
 var kafkaConsumer *kafka.Consumer
 var serviceFacade service.SenderServiceFacadeInterface
 
-func CreateConsumers(kafkaHost string, kafkaTopics []string, serviceFacadeInterface service.SenderServiceFacadeInterface) {
+func CreateConsumers(kafkaHost string, kafkaTopics []string,
+	serviceFacadeInterface service.SenderServiceFacadeInterface, retrySeconds int64) {
 
 	log.Print("Creating the main consumer")
-	createConsumer(kafkaConsumer, kafkaHost, kafkaTopics)
+	createConsumer(kafkaConsumer, kafkaHost, kafkaTopics, false, 0)
 
 	log.Print("Creating the retry consumer")
-	createConsumer(kafkaConsumer, kafkaHost, RETRY_TOPICS)
+	createConsumer(kafkaConsumer, kafkaHost, RETRY_TOPICS, true, retrySeconds)
 
 	serviceFacade = serviceFacadeInterface
 }
 
-func createConsumer(consumer *kafka.Consumer, kafkaHost string, kafkaTopics []string) {
+func createConsumer(consumer *kafka.Consumer, kafkaHost string, kafkaTopics []string, waitRetry bool, retrySeconds int64) {
 	var err error
 
 	log.Printf("Starting consumer for topics %v...", kafkaTopics)
@@ -40,13 +42,16 @@ func createConsumer(consumer *kafka.Consumer, kafkaHost string, kafkaTopics []st
 
 	consumer.SubscribeTopics(kafkaTopics, nil)
 
-	go consumeMessages(consumer)
+	go consumeMessages(consumer, waitRetry, retrySeconds)
 }
 
-func consumeMessages(consumer *kafka.Consumer) {
+func consumeMessages(consumer *kafka.Consumer, waitRetry bool, retrySeconds int64) {
 
 	for {
 		msg, err := consumer.ReadMessage(-1)
+		if waitRetry {
+			time.Sleep(time.Duration(retrySeconds) * time.Second)
+		}
 		if err == nil {
 			log.Printf("Message on %s: \n", msg.Value)
 			err = serviceFacade.SendNotification(msg.Value)
